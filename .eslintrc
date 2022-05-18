@@ -1,0 +1,8 @@
+{
+  "plugins": ["@docusaurus"],
+  "extends": ["plugin:@docusaurus/recommended"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2015
+  }
+}

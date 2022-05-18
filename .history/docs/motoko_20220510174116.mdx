@@ -1,0 +1,25 @@
+---
+sidebar_position: 2
+---
+
+# Tutorial Intro
+
+Let's discover **Motoko language in less than 5 minutes**.
+
+## Getting Started
+
+```js
+console.log("Every repo must come with a mascot.");
+```
+
+```motoko
+actor Counter {
+
+  var value = 0;
+
+  public func inc() : async Nat {
+    value += 1;
+    return value;
+  };
+}
+```
