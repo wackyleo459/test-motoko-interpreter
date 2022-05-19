@@ -1,4 +1,5 @@
 function changeCodeBlock() {
+  console.log("change codeblock has been called");
   // Find all <pre> tags, check if they have a code tag as a direct child.
   // If so, and the code class is Motoko, add run button, and make code editable.
   // Checking first for pre tag
@@ -8,7 +9,7 @@ function changeCodeBlock() {
     var preTag = preTags[i];
     var firstChild = preTag.firstChild;
     if (firstChild && firstChild.tagName === "CODE") {
-      if (firstChild.classList.contains("language-motoko")) {
+      if (preTag.classList.contains("language-motoko")) {
         preTag.classList.add("motoko");
         var config = extractConfig(preTag);
         appendRun(preTag, config);
@@ -54,7 +55,7 @@ function highlightCode(pre) {
   // highlight.js is not very good at incremental changes. We need to reset the previous tags.
   var code_text = pre.firstChild.innerText;
   pre.firstChild.textContent = code_text;
-  window.hljs.highlightBlock(pre);
+  window.hljs.highlightElement(pre);
 }
 
 function saveIncluded(include) {
@@ -74,6 +75,7 @@ function saveIncluded(include) {
 }
 
 function appendRun(element, config) {
+  console.log("appendRun was called");
   if (config.name) {
     Motoko.saveFile(config.name, element.firstChild.innerText);
   }
@@ -139,7 +141,7 @@ function appendRun(element, config) {
       pre.style = "color:green";
       pre.innerText = out.stdout;
       output.appendChild(pre);
-      //window.hljs.highlightBlock(pre);
+      window.hljs.highlightElement(pre);
     }
     highlightCode(element);
   });

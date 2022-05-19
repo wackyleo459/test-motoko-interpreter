@@ -5,7 +5,9 @@ module.exports = function (context, options) {
     injectHtmlTags({ content }) {
       return {
         postBodyTags: [
-          `<script src="http://localhost:3000/run_repl.js"></script>
+          `<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+          <script src="/highlight.bundle.js"></script>
+          <script src="/run_repl.js"></script>
            <script> if (document.getElementsByClassName('language-motoko').length > 0) {
             console.log('motoko is here');}</script>
             <script type="module">
