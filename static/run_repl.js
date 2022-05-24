@@ -138,7 +138,9 @@ function appendRun(element, config) {
   parent.appendChild(output);
   button.addEventListener("click", function () {
     var codes = saveIncluded(config.include);
-    var code = element.firstChild.innerText;
+    var code = element.innerText;
+    console.log("code:", code);
+    console.log("element:", element);
     var file = config.name || "stdin";
     Motoko.saveFile(file, code);
     var out;

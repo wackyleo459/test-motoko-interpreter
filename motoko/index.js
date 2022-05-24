@@ -2,12 +2,12 @@ module.exports = function (context, options) {
   console.log("context from plugin access", context);
   return {
     name: "motoko",
-    clientModules: [require.resolve("../src/run_Motoko/highlight.bundle.js")],
     injectHtmlTags({ content }) {
       return {
         // only gets loaded once, not run every time redirected to new page
         postBodyTags: [
-          `<script src="/run_repl.js"></script>
+          `<script src="/highlight.bundle.js"></script>
+          <script src="/run_repl.js"></script>
           <script type="module">
             import {CodeJar} from 'https://cdn.jsdelivr.net/npm/codejar@3.2.3/codejar.min.js';
             import {withLineNumbers} from 'https://cdn.jsdelivr.net/npm/codejar@3.2.3/linenumbers.js';
