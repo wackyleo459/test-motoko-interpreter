@@ -22,7 +22,41 @@ actor Counter {
     return value;
   };
 }
+
+let count = Counter();
+count.inc();
+
 ```
+
+```motoko
+import Array "mo:base/Array";
+actor Publisher {
+  var subs: [SubscribeMessage] = [];
+  public func subscribe(sub: SubscribeMessage) {
+    subs := Array.append<SubscribeMessage>(subs, [sub]);
+  };
+  public func publish() {
+    for (sub in subs.vals()) {
+      sub.callback();
+    };
+  };
+};
+```
+
+<h2>Single line comments &amp; regexes</h2>
+<pre>
+  <code>// http://lea.verou.me var comment = /\/\*[\w\W]*?\*\//g;</code>
+</pre>
+
+<h2>Link in comment</h2>
+<pre>
+  <code>// http://lea.verou.me /* http://lea.verou.me */</code>
+</pre>
+
+<h2>Nested strings</h2>
+<pre>
+  <code>var foo = "foo", bar = "He \"said\" 'hi'!"</code>
+</pre>
 
 <!-- # jsx inside
 

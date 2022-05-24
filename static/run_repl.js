@@ -12,6 +12,7 @@ function changeCodeBlock() {
       if (preTag.classList.contains("language-motoko")) {
         preTag.classList.add("motoko");
         var config = extractConfig(preTag);
+        console.log("this is config", config);
         appendRun(preTag, config);
       }
     }
@@ -40,12 +41,12 @@ function extractConfig(pre) {
       hook = split[1];
     }
   }
-  var lineNumber = pre.firstChild.innerText.split("\n").length > 3;
+  // var lineNumber = pre.firstChild.innerText.split("\n").length > 3;
   return {
     name: name,
     include: include,
     hook: hook,
-    lineNumber: lineNumber,
+    lineNumber: false,
     isRun: div.classList.contains("run"),
     noRepl: div.classList.contains("no-repl"),
   };
@@ -75,7 +76,6 @@ function saveIncluded(include) {
 }
 
 function appendRun(element, config) {
-  console.log("appendRun was called");
   if (config.name) {
     Motoko.saveFile(config.name, element.firstChild.innerText);
   }
@@ -109,7 +109,32 @@ function appendRun(element, config) {
   button.innerHTML =
     '<span class="run-label">Run</span><svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" style="width: 35px; height: 35px;"><g><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"></path></g></svg>';
   button.classList = "run-button";
-  parent.appendChild(button);
+
+  //attach Run button to buttonGroup
+  var anyButtons = parent.querySelectorAll("button");
+
+  console.log("anyButtons", anyButtons);
+  var copyButton;
+  var buttonGroup;
+  anyButtons.forEach((anyButton) => {
+    if (anyButton.className.includes("copyButton")) {
+      copyButton = anyButton;
+      buttonGroup = document.createElement("div");
+      return;
+    } else if (
+      anyButton.parentNode.className.includes("buttonGroup") &&
+      anyButton.title.includes("Copy")
+    ) {
+      copyButton = anyButton;
+      buttonGroup = anyButton.parentNode;
+      return;
+    }
+  });
+
+  buttonGroup.appendChild(copyButton);
+  parent.appendChild(buttonGroup);
+  buttonGroup.append(button);
+  // parent.appendChild(button);
   parent.appendChild(output);
   button.addEventListener("click", function () {
     var codes = saveIncluded(config.include);
@@ -148,4 +173,13 @@ function appendRun(element, config) {
   if (config.isRun) {
     button.click();
   }
+
+  //delete codejar line numbers
+  // removeElementsByClass("codejar-linenumbers");
+  // function removeElementsByClass(className) {
+  //   const elements = document.getElementsByClassName(className);
+  //   while (elements.length > 0) {
+  //     elements[0].parentNode.removeChild(elements[0]);
+  //   }
+  // }
 }

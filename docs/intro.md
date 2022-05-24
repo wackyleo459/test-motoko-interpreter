@@ -2,6 +2,21 @@
 sidebar_position: 2
 ---
 
+```motoko
+actor Counter {
+
+  var value = 1;
+
+  public func inc() : async Nat {
+    value += 1;
+    return value;
+  };
+}
+
+Counter.inc();
+
+```
+
 # Tutorial Intro
 
 Let's discover **Docusaurus in less than 5 minutes**.

@@ -127,16 +127,18 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
-  //does not work properly, need to return
   scripts: [
     {
-      src: "http://localhost:3000/postscript.js",
-      async: true,
+      src: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js",
     },
   ],
-  //working custom plugin
+  //working custom plugin order: highlight, run, injectPostBody, interpreter(local copies)
   plugins: ["./motoko"],
-  // clientModules: [require.resolve("./src/motoko_utility/run_repl.js")],
+  clientModules: [
+    // require.resolve("./src/run_Motoko/highlight.bundle.js"),
+    // require.resolve("./src/run_Motoko/run_repl.js"),
+    require.resolve("./src/run_Motoko/custom_run.js"),
+  ],
 };
 
 module.exports = config;
