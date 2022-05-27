@@ -13,6 +13,10 @@ console.log("Every repo must come with a mascot.");
 ```
 
 ```motoko
+1 + 2
+```
+
+```motoko
 actor Counter {
 
   var value = 1;
@@ -26,17 +30,16 @@ actor Counter {
 
 ```motoko
 import Array "mo:base/Array";
-actor Publisher {
-  var subs: [SubscribeMessage] = [];
-  public func subscribe(sub: SubscribeMessage) {
-    subs := Array.append<SubscribeMessage>(subs, [sub]);
-  };
-  public func publish() {
-    for (sub in subs.vals()) {
-      sub.callback();
-    };
-  };
-};
+import Nat "mo:base/Nat";
+let xs = [4, 2, 6];
+Array.sort(xs, Nat.compare);
+```
+
+```candid
+service : {
+  inc : () -> ();
+  get : () -> (nat) query;
+}
 ```
 
 <h2>Single line comments &amp; regexes</h2>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import String from '@theme-original/CodeBlock/Content/String';
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import Container from '@theme/CodeBlock/Container';
@@ -26,11 +26,12 @@ export default function StringWrapper(props) {
     const [output, setOutput] = useState('');
     const [error, setError] = useState('');
     const codejar = require('react-codejar');
+    const lineNumbers = props.children.split('\n').length > 3;
     const editorRef = codejar.useCodeJar({
       code,
       onUpdate: (e) => { setCode(e) },
       highlight: hljs.highlightElement,
-      lineNumbers: false,
+      lineNumbers,
     });
     return (
       <>
@@ -44,11 +45,22 @@ export default function StringWrapper(props) {
       </Container>
         {output || error ? (
           <Container as="div" className="language-motoko">
-            { output ? (<pre style={{ color: "green" }}>{output}</pre>) : null }
+            { output ? (<pre style={{ color: "green" }}><code>{output}</code></pre>) : null }
             { error ? (<pre style={{ color: "red" }}>{error}</pre>) : null }
           </Container>
         ) : null}
       </>
+    );
+  }
+  if (props.className === "language-candid") {
+    const ref = React.createRef();
+    useEffect(() => {
+      hljs.highlightElement(ref.current);
+    }, []);
+    return (
+      <Container as="div" className="language-candid">
+        <pre ref={ref}><code>{props.children}</code></pre>
+      </Container>
     );
   }
   return (
