@@ -12,8 +12,16 @@ Let's discover **Motoko language in less than 5 minutes**.
 console.log("Every repo must come with a mascot.");
 ```
 
-```motoko
-1 + 2
+```motoko name=f1
+let x = 1 + 2;
+```
+
+```motoko name=f2 include=f1 no-repl
+let y = x + 1;
+```
+
+```motoko run include=f1,f2
+let z = x + y;
 ```
 
 ```motoko

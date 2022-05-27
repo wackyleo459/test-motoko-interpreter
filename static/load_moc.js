@@ -1,3 +1,5 @@
+const MOC_VERSION = "0.6.27";
+
 async function addPackage(name, repo, version, dir) {
   const meta_url = `https://data.jsdelivr.com/v1/package/gh/${repo}@${version}/flat`;
   const base_url = `https://cdn.jsdelivr.net/gh/${repo}@${version}`;
@@ -25,10 +27,10 @@ window.addEventListener('load', () => {
   if (document.getElementsByClassName('language-motoko').length > 0) {
     const script = document.createElement('script');
     script.async = true;
-    script.src = '/moc-interpreter-0.6.27.js';
+    script.src = `/moc-interpreter-${MOC_VERSION}.js`;
     script.addEventListener('load', () => {
-      addPackage("base", "dfinity/motoko-base", "moc-0.6.27", "src");
-      console.log("moc and base library loaded");
+      addPackage("base", "dfinity/motoko-base", `moc-${MOC_VERSION}`, "src");
+      console.log(`moc ${MOC_VERSION} loaded`);
     });
     document.head.appendChild(script);
   }
