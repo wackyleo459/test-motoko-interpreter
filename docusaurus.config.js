@@ -128,16 +128,7 @@ const config = {
       },
     }),
   scripts: [
-    {
-      src: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js",
-    },
-  ],
-  //working custom plugin order: highlight, run, injectPostBody, interpreter(local copies)
-  plugins: ["./motoko"],
-  clientModules: [
-    // require.resolve("./src/run_Motoko/highlight.bundle.js"),
-    // require.resolve("./src/run_Motoko/run_repl.js"),
-    require.resolve("./src/run_Motoko/custom_run.js"),
+    '/load_moc.js'
   ],
 };
 
