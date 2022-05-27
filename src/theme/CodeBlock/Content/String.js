@@ -13,8 +13,10 @@ hljs.configure({
 });
 
 function RunButton(props) {
+  // buttons with class "run" will be run in load_moc.js when moc is loaded.
+  const className = props.config.isRun ? "run-button run" : "run-button";
   return (
-    <button type="button" class="run-button" aria-label="Run" onClick={() => handleRun(props)}>
+    <button type="button" class={className} aria-label="Run" onClick={() => handleRun(props)}>
       <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" style={{width: "35px", height: "35px"}}><g><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" /></g></svg>
     </button>
   );
@@ -91,6 +93,7 @@ function extractConfig(props) {
   return {
     name,
     include,
+    isRun: props.hasOwnProperty('run'),
   }
 }
 

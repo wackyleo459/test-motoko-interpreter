@@ -24,13 +24,18 @@ async function addPackage(name, repo, version, dir) {
 }
 
 window.addEventListener('load', () => {
-  if (document.getElementsByClassName('language-motoko').length > 0) {
+  if (document.getElementsByClassName('run-button').length > 0) {
     const script = document.createElement('script');
     script.async = true;
     script.src = `/moc-interpreter-${MOC_VERSION}.js`;
     script.addEventListener('load', () => {
       addPackage("base", "dfinity/motoko-base", `moc-${MOC_VERSION}`, "src");
       console.log(`moc ${MOC_VERSION} loaded`);
+      // Run code
+      const btns = document.getElementsByClassName('run-button run');
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].click();
+      };
     });
     document.head.appendChild(script);
   }
