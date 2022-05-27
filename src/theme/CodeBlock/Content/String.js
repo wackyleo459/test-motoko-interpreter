@@ -37,7 +37,7 @@ export default function StringWrapper(props) {
       <>
       <Container as="div" className="language-motoko">
         <div className={styles.codeBlockContent}>
-          <pre ref={editorRef}><code>{code}</code></pre>
+          <pre ref={editorRef} class="language-motoko"><code>{code}</code></pre>
           <div className={styles.buttonGroup}>
             <RunButton code={code} setOutput={setOutput} setError={setError} />
           </div>
@@ -45,7 +45,7 @@ export default function StringWrapper(props) {
       </Container>
         {output || error ? (
           <Container as="div" className="language-motoko">
-            { output ? (<pre style={{ color: "green" }}><code>{output}</code></pre>) : null }
+            { output ? (<pre style={{ color: "green" }} class="language-motoko"><code>{output}</code></pre>) : null }
             { error ? (<pre style={{ color: "red" }}>{error}</pre>) : null }
           </Container>
         ) : null}
@@ -59,7 +59,7 @@ export default function StringWrapper(props) {
     }, []);
     return (
       <Container as="div" className="language-candid">
-        <pre ref={ref}><code>{props.children}</code></pre>
+        <pre class="language-candid" ref={ref}><code>{props.children}</code></pre>
       </Container>
     );
   }
