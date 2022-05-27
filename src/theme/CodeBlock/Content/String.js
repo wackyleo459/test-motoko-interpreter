@@ -45,8 +45,8 @@ export default function StringWrapper(props) {
       </Container>
         {output || error ? (
           <Container as="div" className="language-motoko">
-            { output ? (<pre style={{ color: "green" }} class="language-motoko"><code>{output}</code></pre>) : null }
             { error ? (<pre style={{ color: "red" }}>{error}</pre>) : null }
+            { output ? (<pre style={{ color: "green" }} class="language-motoko"><code>{output}</code></pre>) : null }
           </Container>
         ) : null}
       </>
@@ -75,14 +75,8 @@ function handleRun({code, setOutput, setError}) {
     const file = "stdin";
     Motoko.saveFile(file, code);
     const out = Motoko.run([], file);
-    if (out.stdout) {
-      setOutput(out.stdout);
-      setError('');
-    }
-    if (out.stderr) {
-      setOutput('');
-      setError(out.stderr);
-    }
+    setOutput(out.stdout);
+    setError(out.stderr);
   } else {
     console.log("moc not found");
   }
